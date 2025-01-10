@@ -16,32 +16,28 @@ library(readr)
 
 # Introduction
 
-## Background
-This project examines the career trajectories and success metrics of NBA general managers (GMs) from 2010 to 2024. With aspirations of becoming a GM, I developed a dataset to analyze the credentials, career paths, and success levels of individuals who have held these positions. The dataset includes variables such as education, professional playing experience, and prior roles. I also created a General Manager Success Index (GMSI) to quantify performance, though it remains a work in progress. This index incorporates tenure, team success, and championships while acknowledging room for refinement. This is a project I hope to continue to revise in the future as my skills as a data scientist improve. 
-
-## Objective
+## Background and Objective
+This project examines the career trajectories and success metrics of NBA general managers (GMs) from 2010 to 2024. With aspirations of becoming a GM, I developed a dataset to analyze the credentials, career paths, and success levels of individuals who have held these positions. The dataset includes variables such as education, professional playing experience, and prior roles. I also created a General Manager Success Index (GMSI) to quantify performance, though it remains a work in progress. GMSI is a weighted average including the following columns and weight: Tenure (10%), Regular season winning percentage (15%), Playoff winning percentage (25%), Playoff appearances (10%), and a special equation for Championships (35%). This is a project I hope to continue to revise in the future as my skills as a data scientist improve. 
 The primary goal of this project is to identify trends and patterns among NBA GMs that can inform aspiring professionals about the qualifications and pathways to success. Additionally, the study evaluates the relationship between certain variables and measurable success, as quantified by the GMSI.
 
 # Data Overview
 
-## Data Source
+## Dataset Source and Description 
 The dataset was self-created using information from Basketball Reference, RealGM, and Wikipedia. 
-
-## Dataset Description
 The dataset includes 79 rows, each representing a unique GM from the 2009-2010 season onward. In order to keep the data tidy, GMs that had multiple tenures within this time period were only included once, that being their most recent tenure. 
 Key variables include: 
 
-* GM name and team
-* Tenure (in years)
-* Educational background (College, Graduate School)
-* Playing experience (NCAA or Professional Basketball)
-* Career history (Job Histories)
-* Team performance metrics (regular season and playoff win percentages, playoff appearances, championships)
-
-I wanted to make note of the asterisks in the data set. Brad Stevens, Leon Rose, and Trajan Langdon are NOT general managers of their respective teams. The Celtics, Knicks, and Pistons all technically do not have any executives with the title of general manager. As a result, I put whoever was in charge of basketball operations as acting general manager. The president of basketball operations and general manager differ; the PoBO (President of Basketball Operations) has a macro role while the GM (general manager) has a micro role in terms of roster construction and the team itself. PoBO sets the big-picture strategy that a general manager puts into place on a day-to-day basis. The PoBO has say over the gm. In short, those team's lack of a GM is why their PoBO are in the dataset, as someone still has to run the team at the end of the day. 
+- **GM name and team**
+- **Tenure (in years)**
+- **Educational background** (College, Graduate School)
+- **Playing experience** (NCAA or Professional Basketball)
+- **Career history** (Job Histories)
+- **Team performance metrics** (regular season and playoff win percentages, playoff appearances, championships)
 
 
-Some values, particularly degree information or job history, were unavailable for certain individuals and were marked as "Unknown." For clarity, front office roles were standardized into abbreviations, which I listed below:
+I wanted to make note of the asterisks in the data set. Brad Stevens, Leon Rose, and Trajan Langdon are not general managers of their respective teams, but are the presidents of basketball operations. The Celtics, Knicks, and Pistons do not have active general managers. With that being said, I placed all three of them into my dataset. The president of basketball operations and general manager differ; the President of Basketball Operations (PoBO) has a macro role while the GM has a micro role in terms of roster construction and the team itself. PoBO sets the big-picture strategy that the general manager puts into place on a day-to-day basis. 
+
+Some values, particularly degree information or job history, were unavailable online and were marked as "Unknown." For neatness, front office roles that GMs worked in the past were standardized into the following abbreviations:
 
 * , NBA = position was held for an NBA team
 * AGM = Assitant General Manager
@@ -81,11 +77,50 @@ Some values, particularly degree information or job history, were unavailable fo
 
 # Methodology 
 
-The project answers six key statistical questions by employing descriptive statistics and visualizations. Data cleaning and transformations were performed using R, and analysis was conducted to uncover patterns in GM tenure, education, work history, and success.
+The project answers six key statistical questions by employing descriptive statistics and visualizations. Data cleaning and transformations were performed using R, and analysis was conducted to uncover patterns in GM tenure, education, work history, and success. The first data cleaning can be found below. To calculate GMSI, I will filter out the GMs who were hired before the 2024-2025 season, as this data set stopped recording data at the conclusion of the 2023-2024 season.
 
 ```{r}
 NBA_GMS_Temp_Final <- read_csv("C:/Users/lucas/Downloads/PERSONAL_PROJECTS/NBA_GMS_Temp_Final")
 NBA_GMS_Temp_Final
+
+# Rather than manually editing the data set in sheets and reloading the csv file, I am going to make my changes here. I need to convert all the "Unknown" columns to NA and then filter out NA. 
+NBA_GMs_Cleaned <- NBA_GMS_Temp_Final |>
+  mutate(
+    Regular_Season_Winning_Percentage = na_if(Regular_Season_Winning_Percentage, 'Unknown'),
+    Playoff_Winning_Percentage = na_if(Playoff_Winning_Percentage, 'Unknown'),
+    Playoff_Appearances = na_if(Playoff_Appearances, 'Unknown'),
+    Championships = na_if(Championships, 'Unknown')
+  )
+
+# Now I am going to convert it to numeric. 
+NBA_GMs_Numeric <- NBA_GMs_Cleaned |> 
+  mutate(
+    Regular_Season_Winning_Percentage = as.numeric(Regular_Season_Winning_Percentage),
+    Playoff_Winning_Percentage = as.numeric(Playoff_Winning_Percentage),
+    Playoff_Appearances = as.numeric(Playoff_Appearances),
+    Championships = as.numeric(Championships)
+  )
+
+# Now I am going to filter out the NA values 
+NBA_GMs_Numeric <- NBA_GMs_Numeric |> 
+  filter(!is.na(Regular_Season_Winning_Percentage) & 
+         !is.na(Playoff_Winning_Percentage) & 
+         !is.na(Playoff_Appearances) & 
+         !is.na(Championships))
+
+# Since my data is all squared away, I am going to create a weighted average variable called the General Manager Success Index, or GMSI, to quantify success. 
+NBA_GMs_GMSI <- NBA_GMs_Numeric |>
+  mutate(
+    GMSI = ((Tenure / 24) * 0.1) + 
+           (Regular_Season_Winning_Percentage * 0.15) + 
+           (Playoff_Winning_Percentage * 0.25) + 
+           ((Playoff_Appearances / Tenure) * 0.1) + 
+           (((Championships / Tenure + 1) / 0.28) * 0.35) - 
+           (((Tenure / 24) * (1 - Championships)) * 0.05)
+  
+)
+# I now have a metric that measures success.
+NBA_GMs_GMSI |> arrange(desc(GMSI)) |> relocate(GMSI)
 ```
 
 
@@ -95,11 +130,32 @@ I will answer this first question by finding the mean of the tenure column.
 # I simply calculated the mean using the mean function.
 summary(NBA_GMS_Temp_Final$Tenure)
 ```
-The average tenure of an NBA GM is 5.4 years. This finding aligns with the long-term nature of roster construction and the time required for strategic decisions to manifest in team success. However, 5.4 years can be seen as a double-edged sword. While it allows GMs to implement their vision, it may not always be sufficient to overcome challenges such as injuries, roster missteps, or rebuilding cycles. On the other hand, a tenure exceeding this average often reflects stability and alignment between the GM and ownership, which are critical for sustained success. Comparing the GMSI between GMs who exceed this average tenure and GMs who fail to meet this average tenure would be interesting. 
+The average tenure of an NBA GM is 5.7 years. This finding aligns with the long-term nature of roster construction and the time required for strategic decisions to manifest in team success. However, 5.7 years can be seen as a double-edged sword. While it allows GMs to implement their vision, it may not always be sufficient to overcome challenges such as injuries, roster missteps, or rebuilding cycles. On the other hand, a tenure exceeding this average often reflects stability and alignment between the GM and ownership, which are critical for sustained success. Therefore, comparing GMSI between GMs who exceed this average tenure and GMs who fail to meet this average tenure would be telling. 
+
+```{r}
+# Now I am going to compare GMSI between those who exceed 5.4 years and those who do not by calculating average GMSI for tenure groups
+GMSI_summary <- NBA_GMs_GMSI |>
+  mutate(Tenure_Group = ifelse(Tenure > 5.7, "Above 5.7 Years", "Below 5.7 Years")) |>
+  group_by(Tenure_Group) |>
+  summarise(Average_GMSI = mean(GMSI))
+
+# Now I will create the graph
+GMSI_summary |> ggplot(aes(x = Tenure_Group, y = Average_GMSI, fill = Tenure_Group)) +
+  geom_col(width = 0.6) +
+  labs(
+    title = "Average GMSI by Tenure Group",
+    x = "Tenure Group",
+    y = "Average GMSI"
+  ) +
+  scale_fill_viridis_d(option = "C") +
+  theme_minimal()
+```
+As you can see, GMs who's tenure exceeds 5.7 years have much better GMSI, on average, than those who do not exceed 5.7 years. The difference appears to be about 5 points on the graph. 
+
 
 ## Question 2 [Which teams have had the most amount of GMs since 2010?]
 
-A high frequency of changing GMs will undoubtedly signal poor team success. 
+A high frequency of changing GMs will likely signal poor team success. 
 ```{r}
 # Here I create a frequency table to give me the mode of the categorical variable.
 created_table <- table(NBA_GMS_Temp_Final$Team)
@@ -111,7 +167,31 @@ most_frequent_team <- names(created_table[created_table == max_freq])
 # This is me printing the value.
 most_frequent_team
 ```
-The Hawks, Knicks, Pistons, and Timberwolves have each employed five GMs, indicating instability within their front offices. Frequent turnover often correlates with poor team performance and a lack of consistent vision. It would be interesting to examine the average GMSI of these teams and compare them to league average. 
+The Hawks, Knicks, Pistons, and Timberwolves have each employed five GMs, indicating instability within their front offices. Frequent turnover often correlates with poor team performance and a lack of consistent vision. Let's compare GMSI of these teams to the league average. 
+
+```{r}
+# Calculate average GMSI for each of the four teams and league average
+team_analysis <- NBA_GMs_GMSI |>
+  filter(Team %in% c("Knicks", "Hawks", "Pistons", "Timberwolves")) |>
+  group_by(Team) |>
+  summarise(Average_GMSI = mean(GMSI)) |>
+  bind_rows(
+    NBA_GMs_GMSI |>
+      summarise(Team = "League Average", Average_GMSI = mean(GMSI))
+  )
+
+# Create the graph
+team_analysis |> ggplot(aes(x = reorder(Team, -Average_GMSI), y = Average_GMSI, fill = Team)) +
+  geom_col(width = 0.6) +
+  labs(
+    title = "Average GMSI: Knicks, Hawks, Pistons, Timberwolves vs League Average",
+    x = "Team",
+    y = "Average GMSI"
+  ) +
+  scale_fill_viridis_d(option = "B", direction = -1) +
+  theme_minimal()
+```
+Surprisingly, the Hawks exceed the league average despite having had 5 GMs over this time period. While they haven't ranked atop of the NBA, excluding the 2014-2015 season, they have consistently made the playoffs across all of their GMs. However, the Knicks, Pistons, and Timberwolves have all had terrible losing stretches across this time period, which explains their low GMSI. The Timberwolves being at the bottom of the list makes sense since the Western conference has been much stronger during this time period than the Eastern conference, making it more difficult for them to make the playoffs compared to the Knicks and Pistons. This is important because of the weight that making the playoffs has on the GMSI metric. 
 
 
 ## Question 3 [Where did GMs go to college?]
@@ -121,35 +201,46 @@ Now I'm interested in the colleges where these GMs went. I'll make a graph displ
 # First I need to create a new data set that has a filtered "Colleges" column that only has colleges that appear more than once. 
 filtered_colleges_NBA_GMS <- NBA_GMS_Temp_Final |> add_count(College) |> filter(n > 1)
 # Now I am going to create a bar graph to display this data. I want to fill by the NCAA variable to see how many of these GMs played for their schools' basketball team. 
-filtered_colleges_NBA_GMS |> ggplot(aes(x = College, fill = NCAA)) +
-  geom_bar() + coord_flip() +  labs(
-    title = "Colleges and NCAA Playing History of NBA GMs since 2010",
-    subtitle = "Only displaying Colleges that appeared more than once in data set",
-    x = "College", y = "Number of GMs",
-    color = "Species", shape = "Species")
+filtered_colleges_NBA_GMS |>
+  ggplot(aes(x = reorder(College, -n), fill = NCAA)) +
+  geom_bar() +
+  coord_flip() +
+  labs(
+    title = "Colleges Producing NBA GMs",
+    subtitle = "Colleges appearing more than once, with NCAA playing history",
+    x = "College",
+    y = "Number of GMs"
+  ) +
+  scale_fill_viridis_d(option = "D") +
+  theme_minimal()
 
 # I wanted to see which college had the most amount of GMs who didn't play college basketball, which I found below. 
 filtered_colleges_NBA_GMS |> count(NCAA)
-NBA_GMS_Temp_Final |> filter(College == "Northwestern")
+NBA_GMS_Temp_Final |> filter(College == "Northwestern") |> filter(NCAA == "N")
 ```
-Analysis of educational backgrounds reveals that certain schools such as Duke, Princeton, UNC, and Northwestern appear frequently in this dataset. This is most likely attributed to these institutions' combination of strong academic reputations and successful basketball programs, which can provide both connections and credibility in the sports industry. In general, playing college basketball helps connect individuals with the NBA network, which is reflected by the 20 out of 27 GMs on this list who played in college. Northwestern stands out as the only school producing multiple GMs who did not play basketball, those two being Justin Zanik and Daryl Morey. 
+Analysis of educational backgrounds reveals that certain schools such as Duke, Princeton, UNC, and Northwestern appear frequently in this dataset. This is most likely attributed to these institutions' combination of strong academic reputations and successful basketball programs, which can provide both connections and credibility in the sports industry. In general, playing college basketball helps connect individuals with the NBA network, which is reflected by the 18 out of 25 GMs on this list who played in college. Northwestern stands out as the only school producing multiple GMs who did not play basketball, those two being Justin Zanik and Daryl Morey. 
 
 Since I do not play college basketball, I am interested in the GMs who did not play in college, whom I will explore below. 
 
 ## Question 4 [What did GMs who did not play college basketball major in?]
-Now I want to observe the college majors of GMs who did not play in college. I will do so below. 
 
 ```{r}
 # First I will make a new filtered data set so that I can easily create a graph. 
 NBA_GMS_filtered_by_degree <- NBA_GMS_Temp_Final |> add_count(Degree_Name) |> filter(NCAA == "N") |> filter(Pro == "N") |> filter(Degree_Name != "Unknown")
 # Now I will create a bar graph 
-NBA_GMS_filtered_by_degree |> ggplot(aes(x = Degree_Name)) +
-  geom_bar() + coord_flip() +  labs(
-    title = "College Degrees of NBA GMs since 2010",
-    subtitle = "Only displaying GMs who did not play pro or college basketball",
-    x = "Degree Name", y = "Number of GMs")
+NBA_GMS_filtered_by_degree |>
+  ggplot(aes(x = reorder(Degree_Name, -n))) +
+  geom_bar(fill = "#2C3E50") +
+  coord_flip() +
+  labs(
+    title = "Undergraduate Majors of Non-NCAA GMs",
+    subtitle = "Only GMs who did not play NCAA or professional basketball",
+    x = "Degree Name",
+    y = "Number of GMs"
+  ) +
+  theme_minimal()
 ```
-Among GMs who lacked collegiate or professional basketball experience, the most common undergraduate majors were Marketing, English, and Economics. These findings suggest that while technical degrees may not dominate, skills in communication, strategy, and analysis are valued. Communication skills enable GMs to effectively negotiate contracts, manage team dynamics, and collaborate with stakeholders. Strategic thinking is crucial for long-term planning, including drafting, trades, and cap management. Analytical skills are indispensable for interpreting performance metrics and identifying undervalued talent, making these competencies essential to navigating the multifaceted challenges of a GM role.
+Among GMs who lacked collegiate or professional basketball experience, the most common undergraduate majors were Marketing, English, and Economics. These findings suggest that while technical degrees may not dominate, skills in communication, strategy, and analysis are valued. Communication skills enable GMs to effectively negotiate contracts, manage team dynamics, and collaborate with stakeholders. Strategic thinking is crucial for long-term planning, including drafting, trades, and cap management. Analytical skills are indispensable for interpreting performance metrics and identifying undervalued talent, making these competencies essential to navigating the multifaceted challenges of a GM role. With that being said, the small sample size makes it difficult to make any conclusive statements about college degrees increasing someone's chance of becoming a GM, or a good one for that matter. 
 
 
 ## Question 5 [Where did GMs work prior to their hiring?]
@@ -196,83 +287,64 @@ filtered_job_history_long |>
 
 ```
 
-The job with the most experience prior to becoming a GM was Assistant GM of an NBA team. This makes sense since being an assistant to your future position would give you the utmost amount of relevant experience. With that being said, another notable job with relevant application is Vice President of Basketball Operations. Oftentimes, a GM is either promoted to President of Basketball Operations or holds the title simultaneously to being GM to give them maximum control over the team. I'd therefore argue that being the VPoBO prepares you better for GM as you understand the job from the bosses perspective by being their assistant, or second-hand man in a sense. Being a scout is also a common path taken towards working your way up the front office hierarchy, as GMs must succeed in evaluating talent in the draft or off season. Director of Player Personnel is also connected to this reality, as they are in charge of overseeing scouting and player acquisition, which is the third most common job worked by these GMs. These roles provide critical experience in player evaluation and team operations, all of which are foundational to GM responsibilities. 
+The job with the most experience prior to becoming a GM was Assistant GM of an NBA team. This makes sense since being an assistant to your future position would give you the utmost amount of relevant experience. Another notable job with relevant application is Vice President of Basketball Operations. Oftentimes, a GM is either promoted to President of Basketball Operations or holds the title simultaneously to being GM to give them maximum control over the team. I'd argue that being the VPoBO is one of the best jobs to prepare yourself for being a GM since you've seen your position from your boss' perspective. Being a scout is also a common path taken towards working your way up the front office hierarchy as GMs must succeed in evaluating talent in the draft and free agency. Director of Player Personnel also fits this description as they are in charge of overseeing all scouting and player acquisition. These roles provide critical experience in player evaluation and team operations, all of which are foundational to GM responsibilities. 
 
 
-## Question 6 [What variables contribute to actual success?]
+## Question 6 [What variables contribute to success in terms of GMSI?]
 
-Since I argued that majoring in English would have little carry over into a GM position, let's try and examine the correlation between college degrees and professional success. While the length of their tenure will be the metric to measure success, I understand tenure alone isn't sufficient. I added the following statistics to try and measure success: regular season winning percentage, playoff winning percentage, number of playoff appearances, and number of championships. I will filter out the GMs who were hired before the 2024-2025 season, as this data set stopped recording data at the conclusion of the 2023-2024 season. I will also, as you see below, analyze the relationship between GM success and many other variables in my data set. 
 ```{r}
-# Rather than manually editing the data set in sheets and reloading the csv file, I am going to make my changes here. I need to convert all the "Unknown" columns to NA and then filter out NA. 
-NBA_GMs_Cleaned <- NBA_GMS_Temp_Final |>
-  mutate(
-    Regular_Season_Winning_Percentage = na_if(Regular_Season_Winning_Percentage, 'Unknown'),
-    Playoff_Winning_Percentage = na_if(Playoff_Winning_Percentage, 'Unknown'),
-    Playoff_Appearances = na_if(Playoff_Appearances, 'Unknown'),
-    Championships = na_if(Championships, 'Unknown')
-  )
-
-# Now I am going to convert it to numeric. 
-NBA_GMs_Numeric <- NBA_GMs_Cleaned |> 
-  mutate(
-    Regular_Season_Winning_Percentage = as.numeric(Regular_Season_Winning_Percentage),
-    Playoff_Winning_Percentage = as.numeric(Playoff_Winning_Percentage),
-    Playoff_Appearances = as.numeric(Playoff_Appearances),
-    Championships = as.numeric(Championships)
-  )
-
-# Now I am going to filter out the NA values 
-NBA_GMs_Numeric <- NBA_GMs_Numeric |> 
-  filter(!is.na(Regular_Season_Winning_Percentage) & 
-         !is.na(Playoff_Winning_Percentage) & 
-         !is.na(Playoff_Appearances) & 
-         !is.na(Championships))
-
-# Since my data is all squared away, I am going to create a weighted average variable called the General Manager Success Index, or GMSI, to quantify success. 
-
-
-NBA_GMs_GMSI <- NBA_GMs_Numeric|>
-  mutate(
-    # Calculate GMSI, a weighted average I created
-    GMSI = ((Tenure / 24) * .1) + (Regular_Season_Winning_Percentage * .15) + (Playoff_Winning_Percentage * .25) + ((Playoff_Appearances / Tenure) * .1) + (((Championships / Tenure + 1) / .28) * .35) - (((Tenure / 24) * (1 - Championships)) * .05)
-  )
-
-# I now have a metric that measures success.
-NBA_GMs_GMSI |> arrange(desc(GMSI)) |> relocate(GMSI)
- 
-
-# I will now visualize the relationship between GMSI and various categorical variables
-NBA_GMs_GMSI |> ggplot(aes(x = GMSI, color = NCAA)) +
-  geom_boxplot() + labs(
-    title = "Relationship between GMSI and NCAA Status",
-    subtitle = "By whether or not they played college basketball",
-    x = "GMSI"
-  ) 
+# I will now visualize the relationship between GMSI and various categorical variables. First up is GMSI and NCAA status
+NBA_GMs_GMSI |>
+  ggplot(aes(x = NCAA, y = GMSI, fill = NCAA)) +
+  geom_boxplot() +
+  labs(
+    title = "GMSI by NCAA Status",
+    subtitle = "Comparison of GMSI between NCAA players and non-players",
+    x = "NCAA Status",
+    y = "GMSI"
+  ) +
+  scale_fill_viridis_d(option = "B") +
+  theme_minimal()
 
 # This is GMSI and Pro Status 
-NBA_GMs_GMSI |> ggplot(aes(x = GMSI, color = Pro)) +
-  geom_boxplot() + labs(
-    title = "Relationship between GMSI and Pro Status",
-    subtitle = "By whether or not they played pro basketball",
-    x = "GMSI"
-  ) 
+NBA_GMs_GMSI |>
+  ggplot(aes(x = Pro, y = GMSI, fill = Pro)) +
+  geom_boxplot() +
+  labs(
+    title = "GMSI by Professional Experience",
+    subtitle = "Comparison of GMSI between professional players and non-players",
+    x = "Professional Experience",
+    y = "GMSI"
+  ) +
+  scale_fill_viridis_d(option = "C") +
+  theme_minimal()
 
 # This is GMSI and whether or not they went to graduate school
-NBA_GMs_GMSI |> ggplot(aes(x = GMSI, color = Grad_School)) +
-  geom_boxplot() + labs(
-    title = "Relationship between GMSI and Grad School Status",
-    subtitle = "By whether or not they obtained graduate degree",
-    x = "GMSI"
-  ) 
+NBA_GMs_GMSI |>
+  ggplot(aes(x = Grad_School, y = GMSI, fill = Grad_School)) +
+  geom_boxplot() +
+  labs(
+    title = "GMSI by Graduate Education",
+    subtitle = "Impact of advanced degrees on GMSI",
+    x = "Graduate Degree",
+    y = "GMSI"
+  ) +
+  scale_fill_viridis_d(option = "D") +
+  theme_minimal()
 
 
 # This is GMSI and the most recent job the GMs had prior to being hired
-NBA_GMs_GMSI |> ggplot(aes(x = GMSI, color = Job_History)) +
-  geom_boxplot() + labs(
+NBA_GMs_GMSI |> 
+  ggplot(aes(x = Job_History, y = GMSI, fill = Job_History)) +
+  geom_boxplot() + 
+  labs(
     title = "Relationship between GMSI and Job History",
     subtitle = "Job History being the last job they had prior to being hired",
-    x = "GMSI"
-  ) 
+    x = "Job History",
+    y = "GMSI"
+  ) +
+  scale_fill_viridis_d(option = "E") +
+  theme_minimal()
 
 
 # Now I am going to filter out the data set again so I can analyze college degrees 
@@ -282,31 +354,36 @@ GMSI_filtered_by_degree <- NBA_GMs_GMSI |>
   filter(Degree_Name %in% GMSI_filtered_by_degree$Degree_Name)
 
 # This is the visualization of GMSI and college degrees
-GMSI_filtered_by_degree |> ggplot(aes(x = GMSI, color = Degree_Name)) +
-  geom_boxplot() + labs(
+GMSI_filtered_by_degree |> 
+  ggplot(aes(x = Degree_Name, y = GMSI, fill = Degree_Name)) +
+  geom_boxplot() + 
+  labs(
     title = "Relationship between GMSI and Degree",
     subtitle = "Undergraduate degree",
-    x = "GMSI"
-  ) 
+    x = "Degree Name",
+    y = "GMSI"
+  ) +
+  scale_fill_viridis_d(option = "F") +
+  theme_minimal()
 ```
 
 ### GMSI vs. NCAA Status:
 
 GMs who played college basketball have slightly higher GMSI scores than non-NCAA GMs. While one could argue that the difference is sizable, the reality is that this small difference is likely attributed to the high frequency of GMs who played in college. 
 
-GMSI vs. Professional Basketball Experience:
+### GMSI vs. Professional Basketball Experience:
 
 A similar trend emerges for professional playing experience, with slight advantages in GMSI for former professional players. Playing experience likely offers insights into team dynamics and player evaluation, and could potentially give GMs an edge in the locker room. Reliability amongst management and players can easily make a difference in morale and trust. However, I think the large difference in IQR between the two groups reflects that GMs with professional playing experience perform better than those without. 
 
-GMSI vs. Graduate Education:
+### GMSI vs. Graduate Education:
 
 GMs with JDs demonstrate high GMSI variability. Most of them have work experience in sports agency or the legal field of sports, likely making them great negotiators and contract makers. Graduate education may enhance strategic thinking and negotiation skills, though it is not a consistent predictor of success, as seen by the varying level of success across different graduate degrees.
 
-GMSI vs. Last Job Held:
+### GMSI vs. Last Job Held:
 
 Assistant GM, DoBO, and scouting roles appear most correlated with higher GMSI scores. These positions directly involve decision-making and talent evaluation, integral to GM success. Agents have also seen a plentiful amount of success, with GMs such as Bob Myers and Rob Pelinka winning championships. However, their share is extremely small so it's difficult to make conclusive statements about them. The Head Coach category is skewed by the success of both Pat Riley and Brad Stevens. EVPoBOs have had the least amount of success, reflected by their extremely low median value and IQR. 
 
-GMSI vs. Undergraduate Degree:
+### GMSI vs. Undergraduate Degree:
 
 Degrees in Economics and Political Science correspond to higher GMSI scores, reinforcing the importance of analytical and managerial skills in front-office roles. However, their success could be reflected by how common these degrees are within this dataset. 
 
@@ -321,3 +398,6 @@ This project highlights the diverse pathways and qualifications of NBA GMs while
 * Prior roles like Assistant GM and Director of Basketball Operations are strong precursors to GM appointments and success, while sports agent seem to be on the rise in terms of success. 
 
 * The GMSI serves as a useful, albeit incomplete, metric for evaluating GM performance. Future iterations of this project could refine the index by incorporating additional variables, such as draft outcomes or free-agent signings. Ultimately, this study underscores the multifaceted skill set required to excel as an NBA GM, combining analytical acumen, strategic foresight, and effective leadership.
+
+### Future 
+I plan on quantifying draft success in the near future. This is something that no one that I know of has done yet, but is something that is necessary. Doug Drinen, the founder of Pro Football Reference, created a metric, Approximate Value (AV), that places a number on the value of a player a given season. AV is a great metric for measuring draft success since it takes into account amount of starts, pro bowl appearances, and overall impact. I would love to be able to create a statistic for the NBA so that I could analyze the average AV of players that GMs drafted. Draft success is the most obvious thing missing from the dataset, so I plan on fixing that once my skills as a data scientist improve. 
