@@ -1,0 +1,80 @@
+Name,Team,Current,Tenure,College,Degree_Name,Pro,NCAA,Job_History,Job_History_II,Job_History_III,Job_History_IV,Job_History_V,Job_History_VI,Job_History_VII,Promoted,Grad_School,Regular_Season_Winning_Percentage,Playoff_Winning_Percentage,Playoff_Appearances,Championships
+Elton Brand,76ers,Y,6,Duke,Unknown,Y,Y,"GM, GL","PDC, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,No,MBA,62.4,49.2,6,0
+Jon Horst,Bucks,Y,7,Rochester,Sports Management,N,Y,"DoBO, NBA","BOM, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,No,No,63.8,56.4,7,1
+Marc Eversley,Bulls,Y,4,Urbana,Business Admin,N,N,"SVPoPP, NBA","VPoPP, NBA","VPoS, NBA","VPoCS, NBA","AGM, NBA","PDA, NBA",Unknown,No,No,48.6,20,1,0
+Mike Gansey,Cavs,Y,3,WVU,Criminology,Y,Y,"GM, GL","AGM, NBA","DoDLO, GL",Unknown,Unknown,Unknown,Unknown,No,No,64.6,35.3,2,0
+Brad Stevens*,Celtics,Y,3,DePauw,Economics,N,Y,"HC, NBA","HC, NCAA",Unknown,Unknown,Unknown,Unknown,Unknown,No,No,70.4,66.7,3,1
+Trent Redden,Clippers,Y,1,SMU,Accounting,N,Y,"AGM, NBA","AGM, NBA","DoPP, NBA","BOM, NBA",Unknown,Unknown,Unknown,No,No,62.9,33.3,1,0
+Zach Kleiman,Grizzlies,Y,5,USC,Psychology,N,N,"TC, NBA","AGM, NBA","SNoBO, NBA",Unknown,Unknown,Unknown,Unknown,No,JD,53.8,39.1,3,0
+Landry Fields,Hawks,Y,2,Stanford,Communications,Y,Y,"AGM, NBA","GM, GL",Unknown,Unknown,Unknown,Unknown,Unknown,No,No,46.9,33.3,1,0
+Andy Elisburg,Heat,Y,11,St Thomas,Sports Admin,N,N,"VPoBO, NBA","DoTO, NBA","ADoPR, NBA","PR Asst, NBA",Unknown,Unknown,Unknown,No,No,55.1,60.2,8,0
+Jeff Peterson,Hornets,Y,0,Arkansas,Marketing,N,Y,"AGM, NBA","AGM, NBA","DoS, NBA","BOC, NBA","Scout, NBA",Unknown,Unknown,No,MA,Unknown,Unknown,Unknown,Unknown
+Justin Zanik,Jazz,Y,6,Northwestern,Economics,N,N,"AGM, NBA","AGM, NBA","AGM, NBA",Unknown,Unknown,Unknown,Unknown,No,No,54.6,45.8,3,0
+Monte McNair,Kings,Y,4,Princenton,Computer Science,N,Y,"DoBO, NBA","DoBO, GL","BOA, NBA","BOTA, NBA",Unknown,Unknown,Unknown,No,No,48.7,42.8,1,0
+Leon Rose*,Knicks,Y,1,Dickinson,Poli Sci,N,Y,"Agent, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,JD,60.9,53.8,1,0
+Rob Pelinka,Lakers,Y,8,Michigan,Business Admin,N,Y,"Agent, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,JD,49.6,56.3,4,1
+Anthony Parker,Magic,Y,1,Bradley,Liberal Arts,Y,Y,"GM, GL","Scout, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,No,No,57.3,42.8,1,0
+Nico Harrison,Mavericks,Y,3,Montana State,Biology,Y,Y,"VPoBO, Nike",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,No,56.9,55,2,0
+Sean Marks,Nets,Y,9,Berkley,Poli Sci,Y,Y,"AGM, NBA","Asst Coach, NBA","GM, GL","DoBO, NBA","BOA, NBA",Unknown,Unknown,No,No,48.1,27.6,5,0
+Calvin Booth,Nuggets,Y,5,Penn State,Unknown,Y,Y,"AGM, NBA","DoPP, NBA","Scout, NBA","DoPp, NBA","Scout, NBA",Unknown,Unknown,No,No,64.2,57.6,5,1
+Chad Buchanan,Pacers,Y,7,Simpson,Business Mgmt,N,Y,"AGM, NBA","GM, NBA","DoCS, NBA","Scout, NBA",Unknown,Unknown,Unknown,No,MA,49.2,39.3,4,0
+Bryson Graham,Pelicans,Y,0,TAMU,HR,N,Y,"AGM, NBA","DoCS, NBA","SC, NBA","Video Coord, NBA","BOa, NBA","PDD, NBA","FOi, NBA",No,No,Unknown,Unknown,Unknown,Unknown
+Trajan Langdon*,Pistons,Y,0,Duke,Mathematics,Y,Y,"GM, NBA","AGM, NBA","DoPA, NBA","Scout, NBA",Unknown,Unknown,Unknown,No,No,Unknown,Unknown,Unknown,Unknown
+Bobby Webster,Raptors,Y,7,UCSB,Economics,N,N,"AGM, NBA","VPoBS, NBA","VPoBMaS, NBA",Unknown,Unknown,Unknown,Unknown,No,No,57.9,61.7,4,1
+Rafael Stone,Rockets,Y,4,Williams,Poli Sci,N,Y,"EVPoBO, NBA","GC, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,No,JD,31.4,Unknown,0,0
+Brian Wright,Spurs,Y,5,La Sierra,Business,N,Y,"AGM, NBA","AGM, NBA","DoCS, NBA","SC, NBA",Unknown,Unknown,Unknown,No,MA,36.7,Unknown,0,0
+James Jones,Suns,Y,6,Miami,Finance,Y,Y,"VPoBO, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,"PoBO, NBA",No,55.4,52,4,0
+Sam Presti,Thunder,Y,17,Emerson,Communications,N,Y,"AGM, NBA","DoPP, NBA","ADoS, NBA","BOa, NBA","Video Intern, NBA",Unknown,Unknown,"EVP, NBA",No,54.7,51.3,10,0
+Matt Lloyd,Timberwolves,Y,0,UIC,Unknown,N,N,"SVPoBO, NBA","AGM, NBA","DoCS, NBA","SMoBO, NBA","Scout, NBA","Media Coord, NBA",Unknown,No,No,Unknown,Unknown,Unknown,Unknown
+Joe Cronin,Trail Blazers,Y,3,Northern Col,Unknown,N,Y,"DoPP, NBA","PSaSCA, NBA","BOM, NBA","Scout, NBA",Unknown,Unknown,Unknown,No,MA,32.9,0,0,0
+Mike Dunleavy,Warriors,Y,1,Duke,History,Y,Y,"AGM, NBA","Scout, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,No,No,56,0,0,0
+Will Dawkins,Wizards,Y,1,Emerson,Broadcast Journalism,N,Y,"VPoBO, NBA","VPoIaI, NBA","DoCPP, NBA","SC, NBA","VC, NBA","FOi, NBA",Unknown,No,No,18.2,0,0,0
+Bryan Colangelo,76ers,N,2,Cornell,Business Economics,N,Y,"GM, NBA","GM, NBA","GM, NBA",Unknown,Unknown,Unknown,Unknown,No,No,48.7,50,1,0
+John Hammond,Bucks,N,9,Greenville,Unknown,N,N,"VPoBO, NBA","Asst Coach, NBA","DoS, NBA","Scout, NBA",Unknown,Unknown,Unknown,"GM, NBA",No,43.6,41.2,4,0
+Gar Forman,Bulls,N,9,Utah State,Marketing,N,N,"DoPP, NBA","Asst VPoBO, NBA","Scout, NBA",Unknown,Unknown,Unknown,Unknown,No,No,53.9,55.6,7,0
+David Griffin,Cavs,N,4,ASU,Poli Sci,N,N,"VPoBO, NBA","SVPoBO, NBA","DoPP, NBA","BOa, NBA","Media Relations, NBA","Intern, NBA",Unknown,"EVPoBO, NBA",No,59.1,66.1,3,1
+Travis Schlenk,Hawks,N,5,Bethel,Health Management,N,N,"AGM, NBA","DoPP, NBA","VS, NBA","VC, NBA","BOa, NBA",Unknown,Unknown,No,No,38.2,47.8,2,0
+Wes Wilcox,Hawks,N,2,Fullerton,Unknown,N,N,"AGM, NBA","DoPP, NBA","Asst. Coach, NBA","PPS, NBA","CS, NBA","AS, NBA","VC, NBA",No,No,55.4,37.5,2,0
+Danny Ferry,Hawks,N,3,Duke,Unknown,Y,Y,"VPoBO, NBA","PoBO, NBA","GM, NBA","GM, NBA",Unknown,Unknown,Unknown,No,No,50,38.5,2,0
+Rick Sund,Hawks,N,4,Northwestern,Poli Sci,N,Y,"DoPR, NBA ","GM, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,No,No,59,39,4,0
+Billy King,Nets,N,6,Duke,Unknown,N,Y,"GM, NBA","VPoBA, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,No,MA,41.6,39.3,3,0
+Mitch Kupchak,Hornets,N,6,UNC,Unknown,Y,Y,"GM, NBA","AGM, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,No,No,39.5,0,2,0
+Rich Cho,Hornets,N,7,WSU,Mechanical Engineering,N,N,"GM, NBA","AGM, NBA","DoBA, NBA","Intern, NBA",Unknown,Unknown,Unknown,No,MBA,39.2,37.5,2,0
+Rod Higgins,Hornets,N,7,Fresno State,Unknown,Y,Y,"GM, NBA","AGM, NBA","Asst Coach, NBA",Unknown,Unknown,Unknown,Unknown,"PoBO, NBA",No,38.7,0,2,0
+Daryl Morey,Rockets,N,13,Northwestern,Computer Science,N,N,"DoBO, NBA","AGM, NBA","VPoBO, NBA",Unknown,Unknown,Unknown,Unknown,"PoBO, NBA",MBA,62.1,51.3,10,0
+Koby Altman,Cavs,N,5,Middlebury,Unknown,N,Y,"DoPP, NBA","PPM, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,"PoBO, NBA",MBA,39.5,27.3,2,0
+Chris Grant,Cavs,N,4,USD,Psych,N,Y,"VPoBO, NBA","AGM, NBA","DoS, NBA","Asst DoS, NBA",Unknown,Unknown,Unknown,No,MA,29.2,0,0,0
+Donnie Nelson,Mavericks,N,16,Wheaton,Unknown,N,Y,"Asst Coach, NBA","Asst Coach, NBA","Asst Coach, NBA","Scout, NBA",Unknown,Unknown,Unknown,No,No,61.5,50,14,1
+Tim Connelly,Nuggets,N,9,Pitt,Economics,N,N,"AGM, NBA","DoPP, NBA","Scout, NBA","BOi, NBA",Unknown,Unknown,Unknown,"PoBO, NBA",No,52.1,42.6,4,0
+Masai Ujiri,Nuggets,N,5,Montana State - Billings,Unknown,Y,Y,"EVPoBO, NBA","AGM, NBA","DoPP, NBA","DoGS, NBA",Unknown,Unknown,Unknown,"PoBO, NBA",No,64.16,34.6,5,0
+Troy Weaver,Pistons,N,4,Bowie State,Unknown,N,Y,"VPoBO, NBA","VP, NBA","AGM, NBA","DoPP, NBA","HS, NBA","Asst Coach, NCAA","Asst Coach, NCAA",No,No,23.4,0,0,0
+Ed Stefanski,Pistons,N,2,Penn,Unknown,N,Y,"EVPoBO, NBA","GM, NBA","GM, NBA","DoS, NBA",Unknown,Unknown,Unknown,No,No,40.1,0,1,0
+Jeff Bower,Pistons,N,4,Saint Francis,History,N,Y,"HC, NCAA","HC, NBA","GM, NBA","DoPP, NBA","Asst Coach, NBA","GM, NBA","AGM, NBA",No,No,46.4,0,1,0
+Joe Dumars,Pistons,N,14,McNeese,Unknown,Y,Y,Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,No,53.3,60.3,7,1
+Bob Myers,Warriors,N,11,UCLA,Business,Y,Y,"AGM, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,JD,65.3,77.7,9,4
+Larry Riley,Warriors,N,3,Chadron,Education,N,Y,"Asst Coach, NBA","Asst Coach, NBA","DoPD, NBA","Asst Coach, NBA",Unknown,Unknown,Unknown,No,No,37,0,0,0
+Kevin Pritchard,Pacers,N,5,Kansas,Unknown,Y,Y,"DoPP, NBA","GM, NBA","AGM, NBA","DoPP, NBA","Scout, NBA",Unknown,Unknown,"PoBO, NBA",No,56.2,49,4,0
+Larry Bird,Pacers,N,9,Indiana State,Physical Education,Y,Y,"HC, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,No,50.4,57.8,5,0
+Michael Winger,Clippers,N,5,Miami Ohio,Unknown,N,N,"L&A, NBA","AGM, NBA","Team Counsel, NBA","DoBO, NBA",Unknown,Unknown,Unknown,"President, NBA",JD,59.4,46.5,4,0
+Dave Wohl,Clippers,N,3,Penn,Unknown,Y,Y,"Asst Coach, NBA","AGM, NBA","EVPoBO, NBA","Asst Coach, NBA",Unknown,Unknown,Unknown,No,No,65,44.4,3,0
+Neil Olshey,Trail Blazers,N,10,Le Moyne,English,N,N,"AGM, NBA","Asst Coach, NBA","DoPP, NBA",Unknown,Unknown,Unknown,Unknown,"GM, NBA",MBA,55,28.5,8,0
+Chris Wallace,Grizzlies,N,11,Kansas,Unknown,N,N,"GM, NBA","Scout, NBA","Scout, NBA","Scout, NBA",Unknown,Unknown,Unknown,No,No,49,54.5,7,0
+Pat Riley,Heat,N,24,Kentucky,Unknown,Y,Y,"HC, NBA","HC, NBA","Asst Coach, NBA",Unknown,Unknown,Unknown,Unknown,"President, NBA",No,59.6,62.5,17,3
+Gersson Rosas,Timberwolves,N,2,Houston,Marketing,N,N,"BO, NBA","GM, NBA","EVPOBO, NBA","GM, GL","VPoPP, NBA","DoPP, NBA","DoS, NBA","SVPoBO, NBA",No,30.8,0,0,0
+Scott Layden,Timberwolves,N,3,Saint Francis,Business and Sports Management,N,N,"AGM, NBA","Asst Coach, NBA","GM, NBA","VPoBO, NBA","DoBO, NBA","DoPP, NBA","Asst Coach, NBA",No,No,46.3,20,1,0
+Flip Saunders,Timberwolves,N,2,Minnesota,Unknown,Y,Y,"HC, NBA","HC, NBA","HC, NBA","Asst Coach, NCAA","Asst Coach, NCAA","HC, NCAA",Unknown,No,No,34.2,0,0,0
+David Khan,Timberwolves,N,4,UCLA,English,N,N,"GM, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,No,29.1,0,0,0
+Dell Demps,Pelicans,N,9,Pacific,Business Admin,Y,Y,"VPoBO, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,No,44.2,29.6,3,0
+Scott Perry,Knicks,N,6,Wayne State,Business Admin,N,Y,"EVP, NBA","VPoBO, NBA","AGM, NBA","VPoBO, NBA","AGM, NBA","DoPP, NBA","CS, NBA",No,No,41.2,46.7,2,0
+Steve Mills,Knicks,N,4,Princenton,Sociology,N,Y,"SBP, MSG","SVPoBaPD, NBA","AE, NBA",Unknown,Unknown,Unknown,Unknown,No,No,35.7,0,0,0
+Glen Grunwald,Knicks,N,2,Indiana,Marketing,Y,Y,"SVPoBO, NBA","GM, NBA","GM, NBA","AGM, NBA","GC, NBA",Unknown,Unknown,No,JD/MBA,60.2,35,2,0
+Donnie Walsh,Knicks,N,2,UNC,Unknown,Y,Y,"GM, NBA","Asst Coach, NBA","HC, NBA","Asst Coach, NBA","Asst Coach, NBA",Unknown,Unknown,No,JD,43.3,0,1,0
+Rob Hennigan,Magic,N,5,Emerson,Broadcast Journalism,N,N,"AGM, NBA","DoCaIPP, NBA","DOB, NBA","BOa, NBA","BOi, NBA",Unknown,Unknown,No,No,32.2,0,0,0
+Otis Smith,Magic,N,7,Jacksonville,Marketing,Y,Y,"DoBO, NBA","DoCR, NBA","VPoM, NBA",Unknown,Unknown,Unknown,Unknown,No,No,59.9,38.2,6,0
+Sam Hinkie,76ers,N,3,Oklahoma,Industrial Engineering,N,N,"EVPoBO, NBA","VPoBO, NBA","AGM, NBA",Unknown,Unknown,Unknown,Unknown,No,MBA,19.3,0,0,0
+Ryan McDonough,Suns,N,5,UNC,Journalism,N,N,"AGM, NBA","DoIS, NBA","DoPP, NBA","DoS, NBA","SPtO, NBA",Unknown,Unknown,No,No,37.8,0,0,0
+Lance Blanks,Suns,N,3,UT Austin,English,Y,Y,"AGM, NBA","DoS, NBA","Scout, NBA",Unknown,Unknown,Unknown,Unknown,No,No,43.1,0,0,0
+Vlade Divac,Kings,N,5,Unknown,Unknown,Y,N,"VPoBO, NBA","PoBO, EL","Scout, NBA","PoBO, EL",Unknown,Unknown,Unknown,No,No,40.6,0,0,0
+Pete D'Alessandro,Kings,N,2,St Jonh's,English,N,N,"VPoBO, NBA","AGM, NBA","DoBO, NBA",Unknown,Unknown,Unknown,Unknown,No,JD,35.2,0,0,0
+Geoff Petrie,Kings,N,19,Princenton,English,Y,Y,"VPoBO, NBA",Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,No,No,47.9,65.4,8,0
+R.C. Buford,Spurs,N,17,Friends,Management,N,Y,"AGM, NBA","DoS, NBA","Scout, NBA",Unknown,Unknown,Unknown,Unknown,No,No,73.2,66.2,17,4
